@@ -1,0 +1,28 @@
+[
+	{
+		"USERID": "71dcb4bd-cb71-4c80-9c67-30180059d870",
+		"categories":[
+			{
+				"CID": "abb22ad2-8b12-40f1-9922-3dbbaeb78bd6",
+				"name": "restaurant"
+			},
+			{
+				"CID": "726f6bbc-bb6e-41f1-89a2-d5837cae1cd6",
+				"name": "shopping"
+			}
+		]
+	},
+	{
+		"USERID": "71dcb4bd-cb71-4c80-9c67-30180059d870",
+		"categories":[
+			{
+				"CID": "dfe160e9-a688-4c56-9314-40e7ddee8b1c",
+				"name": "arts and entertainment"
+			},
+			{
+				"CID": "3ed7ac2b-453f-43c1-9f81-8b1a08c0c0cd",
+				"name": "bar"
+			}
+		]
+	}
+]

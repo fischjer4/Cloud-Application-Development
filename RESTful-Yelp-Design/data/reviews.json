@@ -1,0 +1,100 @@
+[
+  {
+    "RID": "ba581b82-db8d-4394-b46d-0d35bf6c6385",
+    "BID": "d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc",
+    "stars": 3,
+    "dollars": 3
+  },
+  {
+    "RID": "f1d394c1-10e6-4271-8b80-d36851e5af77",
+    "BID": "4ca6a773-e76c-4904-8179-92165d38d76a",
+    "stars": 5,
+    "dollars": 0
+  },
+  {
+    "RID": "c8c486f5-ed77-403f-bdd5-74ce1007daa2",
+    "BID": "d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc",
+    "stars": 3,
+    "dollars": 0
+  },
+  {
+    "RID": "373c3a69-b2a1-4624-8f28-e9fef052464b",
+    "BID": "564c46ec-7640-4aee-86ae-edd71502ca06",
+    "stars": 3,
+    "dollars": 1
+  },
+  {
+    "RID": "f9bb4094-7142-471c-a81d-64d1d278bcb5",
+    "BID": "73124802-4c8e-4fba-8313-cd37ae95f4e9",
+    "stars": 1,
+    "dollars": 2
+  },
+  {
+    "RID": "064d7e33-7d9b-41f9-8cec-8797020d6e6a",
+    "BID": "99cc7b42-0915-4883-b00e-95f291b442e4",
+    "stars": 0,
+    "dollars": 4
+  },
+  {
+    "RID": "9cc93ad3-8aa7-4390-97f3-d035fc4b88ec",
+    "BID": "ebf03985-483e-4c02-bbc4-642215aa3850",
+    "stars": 0,
+    "dollars": 2
+  },
+  {
+    "RID": "1cc37689-b3b1-4298-9d6b-258d5cbb6e75",
+    "BID": "b19c93a1-eb23-4526-86f9-1c833b64b8cf",
+    "stars": 4,
+    "dollars": 2,
+    "written": "Occaecat duis ex exercitation aliqua eiusmod fugiat deserunt cillum dolore quis. Dolore duis non ex dolor cillum. Nisi laboris consequat ea eu excepteur ipsum duis laborum tempor ullamco quis."
+  },
+  {
+    "RID": "9b41127c-d7f5-4cff-b833-c83a3beae2cd",
+    "BID": "5352f0a9-ac85-40ee-b667-ff5fcc0862d5",
+    "stars": 0,
+    "dollars": 2,
+    "written": "Id in deserunt sunt esse adipisicing. Ut est reprehenderit fugiat deserunt. Sit reprehenderit sint laborum aliquip incididunt cillum."
+  },
+  {
+    "RID": "4e45562a-f7c0-489d-87b4-840799d3db32",
+    "BID": "dfcd25f4-9780-443f-8d1b-d488e9855234",
+    "stars": 5,
+    "dollars": 3,
+    "written": "Culpa elit pariatur ipsum eu ullamco veniam consequat fugiat aliquip cupidatat nostrud commodo reprehenderit irure. Enim officia duis amet eu nostrud enim do incididunt cillum. Ea est fugiat tempor aliqua do exercitation ad."
+  },
+  {
+    "RID": "b260d9e4-8a5e-421b-a4df-c4873ced9fb3",
+    "BID": "3f07ace5-1a43-485c-8ca9-99b788079f14",
+    "stars": 5,
+    "dollars": 2,
+    "written": "Exercitation occaecat excepteur quis consectetur incididunt mollit reprehenderit esse tempor. Anim labore pariatur ipsum adipisicing eiusmod laboris nisi deserunt. Cillum officia labore id elit magna velit exercitation Lorem dolor ex in adipisicing."
+  },
+  {
+    "RID": "750fb896-96e6-4d1f-b5d2-8be44deb0716",
+    "BID": "6dd42bf4-a382-4667-a65e-f6a85cb0dc3d",
+    "stars": 3,
+    "dollars": 0,
+    "written": "Consequat amet cillum aliquip voluptate labore. Consectetur aliquip laborum est cillum eu minim veniam fugiat nisi deserunt elit. Nostrud sit in ea eu voluptate."
+  },
+  {
+    "RID": "6b63dcd7-d5cb-49a2-8770-c4cd53c3c14e",
+    "BID": "2ae095dc-2e57-4b87-8138-bd9d0b85bed2",
+    "stars": 3,
+    "dollars": 3,
+    "written": "Quis do labore quis nulla in. Ipsum ea sint reprehenderit et ipsum proident culpa cupidatat eiusmod cillum. Ea commodo do occaecat non elit nulla Lorem adipisicing quis aliquip nostrud velit."
+  },
+  {
+    "RID": "3ac3cbc7-e7e6-4701-a7e8-0131506ce4a9",
+    "BID": "6f1b9262-9201-4717-ac67-eb0547d8d810",
+    "stars": 5,
+    "dollars": 0,
+    "written": "Incididunt elit ad amet occaecat ex sunt est occaecat dolor dolore dolor in. Nostrud ullamco ad consectetur mollit officia deserunt et. Aliquip in sint veniam adipisicing irure consequat reprehenderit nisi in."
+  },
+  {
+    "RID": "9785f1ef-5723-4391-b209-3df5e6212013",
+    "BID": "a650f306-4941-4633-8747-7c55c7089233",
+    "stars": 1,
+    "dollars": 1,
+    "written": "Nisi nisi aute deserunt pariatur dolor nostrud ex eiusmod incididunt amet. Nulla nostrud ex culpa exercitation sit ullamco minim quis excepteur sint minim. Voluptate occaecat esse ea dolor sunt."
+  }
+]

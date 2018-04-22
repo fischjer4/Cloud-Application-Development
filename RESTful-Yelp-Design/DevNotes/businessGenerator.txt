@@ -1,0 +1,32 @@
+[
+  {
+     'repeat(5, 10)': {
+      BID: '{{guid()}}',
+      name: '{{company()}}',
+      streetAddr: '{{integer(100, 999)}} {{street()}}',
+      city: '{{city()}}', 
+      state: '{{state()}}',
+      zip: '{{integer(100, 10000)}}',
+      phone: '+1 {{phone()}}',
+      category: '{{lorem(1, "words")}}',
+      subcategory: '{{lorem(1, "words")}}',
+      email: function (tags) {
+        return ('employee' + '@' + this.name + tags.domainZone()).toLowerCase();
+      }
+    }
+  },
+  {
+     'repeat(5, 10)': {
+      BID: '{{guid()}}',
+      name: '{{company()}}',
+      streetAddr: '{{integer(100, 999)}} {{street()}}',
+      city: '{{city()}}', 
+      state: '{{state()}}',
+      zip: '{{integer(100, 10000)}}',
+      phone: '+1 {{phone()}}',
+      category: '{{lorem(1, "words")}}',
+      subcategory: '{{lorem(1, "words")}}',
+      website: 'http://{{company()}}{{tags.domainZone()}}'
+    }
+  }
+]

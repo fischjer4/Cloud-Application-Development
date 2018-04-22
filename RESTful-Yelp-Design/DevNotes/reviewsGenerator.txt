@@ -1,0 +1,19 @@
+[
+  {
+     'repeat(5, 10)': {
+       RID: '{{guid()}}',
+       BID: '{{guid()}}',
+       stars: '{{integer(0,5)}}',
+       dollars: '{{integer(0,4)}}'
+     }
+  },
+  {
+     'repeat(5, 10)': {
+       RID: '{{guid()}}',
+       BID: '{{guid()}}',
+       stars: '{{integer(0,5)}}',
+       dollars: '{{integer(0,4)}}',
+       written: '{{lorem(3, "sentences")}}'
+     }
+  }
+]

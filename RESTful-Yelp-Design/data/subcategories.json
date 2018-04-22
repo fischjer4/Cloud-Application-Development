@@ -1,0 +1,32 @@
+[
+	{
+		"CID": "abb22ad2-8b12-40f1-9922-3dbbaeb78bd6",
+		"subcategories":[
+			{
+				"SCID": "167c1631-51b6-409f-b76c-28274ad8e108",
+				"name": "brewpub"
+			},
+			{
+				"SCID": "0e1ee3f7-fba5-4e98-8a61-96548724121e",
+				"name": "chinese"
+			},
+			{
+				"SCID": "5e38fce0-8e8c-43bc-9499-831037152df2",
+				"name": "pizza"
+			}
+		]
+	},
+	{
+		"CID": "726f6bbc-bb6e-41f1-89a2-d5837cae1cd6",
+		"subcategories":[
+			{
+				"SCID": "33176b22-18df-4850-a6a3-a40d333f45e9",
+				"name": "grocery store"
+			},
+			{
+				"SCID": "8f21232b-7c13-4574-9d37-740f14b0f048",
+				"name": "flowers"
+			}
+		]
+	}
+]

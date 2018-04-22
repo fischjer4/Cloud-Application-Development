@@ -1,0 +1,28 @@
+{
+  "name": "restful-yelp-design",
+  "version": "1.0.0",
+  "description": "A RESTful API Using express and Node.js that mimics a Yelp review site",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "uniqid": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js || node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OSU-CS493-Sp18/assignment-1-fischjer4.git"
+  },
+  "author": "Jeremy Fischer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OSU-CS493-Sp18/assignment-1-fischjer4/issues"
+  },
+  "homepage": "https://github.com/OSU-CS493-Sp18/assignment-1-fischjer4#readme"
+}

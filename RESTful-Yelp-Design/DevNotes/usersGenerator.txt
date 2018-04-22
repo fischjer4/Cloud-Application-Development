@@ -1,0 +1,27 @@
+[
+  {
+     'repeat(5, 10)': {
+       USERID: '{{guid()}}',
+       reviews:[
+         '{{guid()}}',
+         '{{guid()}}',
+         '{{guid()}}'
+       ],
+       photos:[
+         '{{guid()}}',
+         '{{guid()}}',
+         '{{guid()}}'
+       ],
+       bussinesses:[
+         '{{guid()}}',
+         '{{guid()}}',
+         '{{guid()}}'
+       ],
+       categories:[
+         '{{guid()}}',
+         '{{guid()}}',
+         '{{guid()}}'
+       ]
+     }
+  }
+]
