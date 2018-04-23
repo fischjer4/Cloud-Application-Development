@@ -1,0 +1,582 @@
+{
+	"info": {
+		"_postman_id": "b22719a7-6ba9-4681-83d0-a41661e23cb0",
+		"name": "RESTful Yelp API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Business",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"McIsaccs\",\n  \"streetAddr\": \"6374 Old Parkdale Rd.\",\n  \"city\": \"Parkdale\",\n  \"state\": \"Oregon\",\n  \"zip\": \"97041\",\n  \"phone\": \"+1 (541)399-6865\",\n  \"category\": \"shopping\",\n  \"subcategory\": \"grocery store\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/businesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"businesses"
+					]
+				},
+				"description": "Adds a business"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Businesses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/businesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"businesses"
+					]
+				},
+				"description": "Gets all businesses"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Business",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Testing\",\n  \"streetAddr\": \"6374 Old Parkdale Rd.\",\n  \"city\": \"Parkdale\",\n  \"state\": \"Oregon\",\n  \"zip\": \"97041\",\n  \"phone\": \"+1 (541)399-6865\",\n  \"category\": \"shopping\",\n  \"subcategory\": \"grocery store\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/businesses/d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"businesses",
+						"d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc"
+					]
+				},
+				"description": "Modifies a certain business"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Business",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/businesses/d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"businesses",
+						"d2d7fbb9-bc20-4746-a6c0-dc4f32388bcc"
+					]
+				},
+				"description": "Deletes a certain business"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Detailed Business",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/businesses/bd207718-5554-4f83-b8c2-4132221cc62d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"businesses",
+						"bd207718-5554-4f83-b8c2-4132221cc62d"
+					]
+				},
+				"description": "Gets a detailed business. Returns basic business info as well as all reviews and photos."
+			},
+			"response": []
+		},
+		{
+			"name": "Post Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"stars\": 3,\n\t\"dollars\": 4\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/reviews/bd207718-5554-4f83-b8c2-4132221cc62d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"reviews",
+						"bd207718-5554-4f83-b8c2-4132221cc62d"
+					]
+				},
+				"description": "Adds a review for a certain business"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Review",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"stars\": 5,\n\t\"dollars\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/reviews/bd207718-5554-4f83-b8c2-4132221cc62d/ba581b82-db8d-4394-b46d-0d35bf6c6385",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"reviews",
+						"bd207718-5554-4f83-b8c2-4132221cc62d",
+						"ba581b82-db8d-4394-b46d-0d35bf6c6385"
+					]
+				},
+				"description": "Modify a certain review"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Review",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/reviews/bd207718-5554-4f83-b8c2-4132221cc62d/ba581b82-db8d-4394-b46d-0d35bf6c6385",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"reviews",
+						"bd207718-5554-4f83-b8c2-4132221cc62d",
+						"ba581b82-db8d-4394-b46d-0d35bf6c6385"
+					]
+				},
+				"description": "Deletes a certain review"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"photo\": \"http://mycompany.com?photo=panda.jpg\",\n\t\"caption\": \"company logo\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/photos/bd207718-5554-4f83-b8c2-4132221cc62d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"photos",
+						"bd207718-5554-4f83-b8c2-4132221cc62d"
+					]
+				},
+				"description": "Adds a photo to a certain business"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Photo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"photo\": \"http://Ronelon/Reese.png\",\n\t\"caption\": \"Test caption\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/photos/bd207718-5554-4f83-b8c2-4132221cc62d/6cda647a-dc19-4d50-a395-15ba4bc5d84e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"photos",
+						"bd207718-5554-4f83-b8c2-4132221cc62d",
+						"6cda647a-dc19-4d50-a395-15ba4bc5d84e"
+					]
+				},
+				"description": "Modifies a certain photo"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Photo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/photos/bd207718-5554-4f83-b8c2-4132221cc62d/6cda647a-dc19-4d50-a395-15ba4bc5d84e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"photos",
+						"bd207718-5554-4f83-b8c2-4132221cc62d",
+						"6cda647a-dc19-4d50-a395-15ba4bc5d84e"
+					]
+				},
+				"description": "Deletes a certain photo"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories"
+					]
+				},
+				"description": "Gets a list of all categories"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Testing Category\",\n\t\"subcategories\": [\"TestSub1\", \"TestSub2\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories"
+					]
+				},
+				"description": "Adds a new category"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Category",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Put Test\",\n\t\"subcategories\": [\"TestSub1\", \"TestSub2\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/categories/abb22ad2-8b12-40f1-9922-3dbbaeb78bd6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"abb22ad2-8b12-40f1-9922-3dbbaeb78bd6"
+					]
+				},
+				"description": "Modifies a certain category"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/categories/726f6bbc-bb6e-41f1-89a2-d5837cae1cd6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"726f6bbc-bb6e-41f1-89a2-d5837cae1cd6"
+					]
+				},
+				"description": "Deletes a certain category"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Subcategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/categories/abb22ad2-8b12-40f1-9922-3dbbaeb78bd6/subcategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"abb22ad2-8b12-40f1-9922-3dbbaeb78bd6",
+						"subcategories"
+					]
+				},
+				"description": "Gets a list of subcategories for a certain category"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Subcategory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Post Test\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/categories/abb22ad2-8b12-40f1-9922-3dbbaeb78bd6/subcategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"abb22ad2-8b12-40f1-9922-3dbbaeb78bd6",
+						"subcategories"
+					]
+				},
+				"description": "Adds a new subcategory for a certain category"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Subcategory",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Put Subcategory\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/categories/726f6bbc-bb6e-41f1-89a2-d5837cae1cd6/subcategories/33176b22-18df-4850-a6a3-a40d333f45e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"726f6bbc-bb6e-41f1-89a2-d5837cae1cd6",
+						"subcategories",
+						"33176b22-18df-4850-a6a3-a40d333f45e9"
+					]
+				},
+				"description": "Modifies a certain subcategory"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Subcategory",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/categories/726f6bbc-bb6e-41f1-89a2-d5837cae1cd6/subcategories/8f21232b-7c13-4574-9d37-740f14b0f048",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"categories",
+						"726f6bbc-bb6e-41f1-89a2-d5837cae1cd6",
+						"subcategories",
+						"8f21232b-7c13-4574-9d37-740f14b0f048"
+					]
+				},
+				"description": "Deletes a certain subcategory"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users Business",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/users/d9551411-9ad9-4bd3-9b78-83eb9991ec09/businesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"d9551411-9ad9-4bd3-9b78-83eb9991ec09",
+						"businesses"
+					]
+				},
+				"description": "Gets a list of all businesses the user owns"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/users/d9551411-9ad9-4bd3-9b78-83eb9991ec09/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"d9551411-9ad9-4bd3-9b78-83eb9991ec09",
+						"reviews"
+					]
+				},
+				"description": "Gets a list of the user's reviews"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Photos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/users/d9551411-9ad9-4bd3-9b78-83eb9991ec09/photos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"d9551411-9ad9-4bd3-9b78-83eb9991ec09",
+						"photos"
+					]
+				},
+				"description": "Gets a list of user's photos"
+			},
+			"response": []
+		}
+	]
+}
