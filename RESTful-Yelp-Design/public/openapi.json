@@ -1,0 +1,1839 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Yelp-like API",
+    "description": "RESTful API for a Yelp-like application"
+  },
+  "paths": {
+    "/businesses": {
+      "get": {
+        "summary": "Fetch a list of all businesses",
+        "description": "Returns a paginated list of businesses.\n",
+        "operationId": "getAllBusinesses",
+        "tags": [
+          "Businesses"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of businesses to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned businesses.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of businesses per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of businesses.",
+                      "example": 1264
+                    },
+                    "businesses": {
+                      "type": "array",
+                      "description": "The returned businesses.",
+                      "items": {
+                        "$ref": "#/components/schemas/businesses"
+                      }
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/businesses?page=2",
+                        "lastPage": "/businesses?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submits a new business",
+        "operationId": "postBusiness",
+        "tags": [
+          "Businesses"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/businessesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New business successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "BID": {
+                      "type": "string",
+                      "description": "Unique ID representing the business.",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/businesses/d2d7fbb9-bc2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/businessesReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/businessesOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/businesses/{businessID}": {
+      "parameters": [
+        {
+          "name": "businessID",
+          "in": "path",
+          "description": "Unique ID of a business.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Gets a detailed decription of a business",
+        "description": "Returns the basic business info, along with a paginated list of reviews and photos.\n",
+        "operationId": "getDetailedBusinesses",
+        "tags": [
+          "Businesses"
+        ],
+        "parameters": [
+          {
+            "name": "reviewPage",
+            "in": "query",
+            "description": "Specifies a specific page of reviews to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "photoPage",
+            "in": "query",
+            "description": "Specifies a specific page of photos to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "The business's name"
+                    },
+                    "streetAdr": {
+                      "type": "string",
+                      "example": "The business's street address"
+                    },
+                    "city": {
+                      "type": "string",
+                      "example": "The business's city"
+                    },
+                    "state": {
+                      "type": "string",
+                      "example": "The business's state"
+                    },
+                    "zip": {
+                      "type": "string",
+                      "example": "The business's zip code"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "The business's phone number"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "The business's category (e.g. shopping)"
+                    },
+                    "subcategory": {
+                      "type": "string",
+                      "example": "The business's subcategory"
+                    },
+                    "photos": {
+                      "type": "object",
+                      "properties": {
+                        "pageNumber": {
+                          "type": "integer",
+                          "description": "Page number of returned photos.",
+                          "example": 1
+                        },
+                        "totalPages": {
+                          "type": "integer",
+                          "description": "Total number of pages available.",
+                          "example": 127
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "description": "Number of photos per page.",
+                          "example": 10
+                        },
+                        "totalCount": {
+                          "type": "integer",
+                          "description": "Total number of photos.",
+                          "example": 1264
+                        },
+                        "photos": {
+                          "type": "array",
+                          "description": "The returned photos.",
+                          "items": {
+                            "$ref": "#/components/schemas/returnPhotos"
+                          }
+                        },
+                        "links": {
+                          "type": "object",
+                          "example": {
+                            "nextPage": "/photoPage?page=2",
+                            "lastPage": "/photoPage?page=2"
+                          }
+                        }
+                      }
+                    },
+                    "reviews": {
+                      "type": "object",
+                      "properties": {
+                        "pageNumber": {
+                          "type": "integer",
+                          "description": "Page number of returned reviews.",
+                          "example": 1
+                        },
+                        "totalPages": {
+                          "type": "integer",
+                          "description": "Total number of pages available.",
+                          "example": 127
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "description": "Number of reviews per page.",
+                          "example": 10
+                        },
+                        "totalCount": {
+                          "type": "integer",
+                          "description": "Total number of rewviews.",
+                          "example": 1264
+                        },
+                        "photos": {
+                          "type": "array",
+                          "description": "The returned reviews.",
+                          "items": {
+                            "$ref": "#/components/schemas/returnReviews"
+                          }
+                        },
+                        "links": {
+                          "type": "object",
+                          "example": {
+                            "nextPage": "/reviewPage?page=2",
+                            "lastPage": "/reviewPage?page=2"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      },
+      "put": {
+        "summary": "Modifies a business",
+        "operationId": "putBusiness",
+        "tags": [
+          "Businesses"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/businessesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Modifying business successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "BID": {
+                      "type": "string",
+                      "description": "Unique ID representing the business.",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/businesses/d2d7fbb9-bc2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/businessesReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/businessesOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a business",
+        "operationId": "deleteBusiness",
+        "tags": [
+          "Businesses"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the business successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      }
+    },
+    "/reviews/{businessID}": {
+      "parameters": [
+        {
+          "name": "businessID",
+          "in": "path",
+          "description": "Unique ID of a business.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Submits a new review for a business with ID {businessID}",
+        "operationId": "postReview",
+        "tags": [
+          "Reviews"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reviewsReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New review successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RID": {
+                      "type": "string",
+                      "description": "Unique ID representing the review.",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/reviews/{businessID}/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/reviewsReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/reviewsOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/{businessID}/{restaurantID}": {
+      "parameters": [
+        {
+          "name": "businessID",
+          "in": "path",
+          "description": "Unique ID of a business.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        },
+        {
+          "name": "restaurantID",
+          "in": "path",
+          "description": "Unique ID of a reviews.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "asdfs-ds3fs2",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Modifies a review for a business",
+        "operationId": "putReview",
+        "tags": [
+          "Reviews"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reviewsReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Modifying review successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RID": {
+                      "type": "string",
+                      "description": "Unique ID representing the review.",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/reviews/{businessID}/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/reviewsReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/reviewsOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a review for a business",
+        "operationId": "deleteReview",
+        "tags": [
+          "Reviews"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the review successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      }
+    },
+    "/photos/{businessID}": {
+      "parameters": [
+        {
+          "name": "businessID",
+          "in": "path",
+          "description": "Unique ID of a business.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Submits a new photo for a business with ID {businessID}",
+        "operationId": "postPhoto",
+        "tags": [
+          "Photos"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/photosReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New photo successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "BID": {
+                      "type": "string",
+                      "description": "Unique ID representing the business of which the review is for",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "PID": {
+                      "type": "string",
+                      "description": "Unique ID representing the review.",
+                      "example": "fasdfk-32fd"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/photos/{businessID}/fasdfk-32fd"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/photosReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/photosOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photos/{businessID}/{photoID}": {
+      "parameters": [
+        {
+          "name": "businessID",
+          "in": "path",
+          "description": "Unique ID of a business.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        },
+        {
+          "name": "photoID",
+          "in": "path",
+          "description": "Unique ID of a photo.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dal32-sdfs3",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Modifies a photo for a business",
+        "operationId": "putPhoto",
+        "tags": [
+          "Photos"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/photosReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Modifying photo successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "BID": {
+                      "type": "string",
+                      "description": "Unique ID representing the business of which the review is for",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "PID": {
+                      "type": "string",
+                      "description": "Unique ID representing the review.",
+                      "example": "fasdfk-32fd"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/photos/{businessID}/fasdfk-32fd"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/photosReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/photosOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a photo for a business",
+        "operationId": "deletePhoto",
+        "tags": [
+          "Photos"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the photo successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Fetch a list of all categories",
+        "description": "Returns a paginated list of categories.\n",
+        "operationId": "getAllCategories",
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of categories to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned categories.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of categories per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of categories.",
+                      "example": 1264
+                    },
+                    "categories": {
+                      "type": "array",
+                      "description": "The returned categories.",
+                      "items": {
+                        "$ref": "#/components/schemas/categories"
+                      }
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/categories?page=2",
+                        "lastPage": "/categories?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submits a new category",
+        "operationId": "postCategory",
+        "tags": [
+          "Categories"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categoriesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New caategory successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CID": {
+                      "type": "string",
+                      "description": "Unique ID representing the category",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/categories/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/categoriesReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/categoriesOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{categoryID}": {
+      "parameters": [
+        {
+          "name": "categoryID",
+          "in": "path",
+          "description": "Unique ID of a category.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Modifies a category",
+        "operationId": "putCategory",
+        "tags": [
+          "Categories"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/categoriesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Modifying category successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CID": {
+                      "type": "string",
+                      "description": "Unique ID representing the category",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/categories/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/categoriesReq"
+                        },
+                        "optional": {
+                          "$ref": "#/components/schemas/categoriesOptional"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a category",
+        "operationId": "deleteCategory",
+        "tags": [
+          "Categories"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the category successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      }
+    },
+    "/categories/{categoryID}/subcategories": {
+      "parameters": [
+        {
+          "name": "categoryID",
+          "in": "path",
+          "description": "Unique ID of a category.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Fetch a list of all subcategories for the {categoryID}",
+        "description": "Returns a paginated list of subcategories.\n",
+        "operationId": "getAllSubategories",
+        "tags": [
+          "subcategories"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of subcategories to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned subcategories.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of subcategories per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of subcategories.",
+                      "example": 1264
+                    },
+                    "subcategories": {
+                      "type": "array",
+                      "description": "The returned subcategories.",
+                      "items": {
+                        "$ref": "#/components/schemas/subcategories"
+                      }
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/categories/{categoryID}/subcategories?page=2",
+                        "lastPage": "/categories/{categoryID}/subcategories?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submits a new subcategories",
+        "operationId": "postSubcategories",
+        "tags": [
+          "Subcategories"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subcategoriesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New subcategory successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "SCID": {
+                      "type": "string",
+                      "description": "Unique ID representing the subcategory",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/categories/{categoryID}/subcategories/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/subcategoriesReq"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Modifies a subcategory",
+        "operationId": "putSubcategory",
+        "tags": [
+          "Subcategories"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subcategoriesReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Modifying subcategory successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "SCID": {
+                      "type": "string",
+                      "description": "Unique ID representing the subcategory",
+                      "example": "d2d7fbb9-bc20"
+                    },
+                    "links": {
+                      "type": "object",
+                      "description": "links to relevant endpoints",
+                      "example": {
+                        "business": "/categories/{categoryID}/subcategories/d2d7fbb9-bc20"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrectly-formatted request body, or missing requirments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "err": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string",
+                          "description": "reason for 400 response",
+                          "example": "Request Body is missing required fields"
+                        },
+                        "required": {
+                          "$ref": "#/components/schemas/subcategoriesReq"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a subcategory",
+        "operationId": "deleteSubcategory",
+        "tags": [
+          "Subcategories"
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the subcategory successfully"
+          },
+          "400": {
+            "$ref": "#/components/responses/noPath"
+          }
+        }
+      }
+    },
+    "/users/{userID}/businesses": {
+      "parameters": [
+        {
+          "name": "userID",
+          "in": "path",
+          "description": "Unique ID of a user.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Fetch a list of all businesses the {userID} owns",
+        "description": "Returns a paginated list of user businesses.\n",
+        "operationId": "getUserBusinesses",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of user businesses to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned user businesses.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of user businesses per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of user businesses.",
+                      "example": 1264
+                    },
+                    "businesses": {
+                      "type": "array",
+                      "description": "The returned user businesses.",
+                      "example": [
+                        "fasdfas-ad31d",
+                        "asdfasd-dj133",
+                        "fasdfs-d13f"
+                      ]
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/users/{userID}/businesses?page=2",
+                        "lastPage": "/users/{userID}/businesses?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userID}/photos": {
+      "parameters": [
+        {
+          "name": "userID",
+          "in": "path",
+          "description": "Unique ID of a user.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Fetch a list of all photos the {userID} owns",
+        "description": "Returns a paginated list of user photos.\n",
+        "operationId": "getUserPhotos",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of user photos to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned user photos.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of user photos per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of user photos.",
+                      "example": 1264
+                    },
+                    "photos": {
+                      "type": "array",
+                      "description": "The returned user photos.",
+                      "example": [
+                        "fasdfas-ad31d",
+                        "asdfasd-dj133",
+                        "fasdfs-d13f"
+                      ]
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/users/{userID}/photos?page=2",
+                        "lastPage": "/users/{userID}/photos?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userID}/reviews": {
+      "parameters": [
+        {
+          "name": "userID",
+          "in": "path",
+          "description": "Unique ID of a user.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "dsd792d-f3sdf",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Fetch a list of all reviews the {userID} owns",
+        "description": "Returns a paginated list of user reviews.\n",
+        "operationId": "getUserReviews",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Specifies a specific page of user reviews to request.\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "Page number of returned user reviews.",
+                      "example": 1
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "description": "Total number of pages available.",
+                      "example": 127
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "Number of user reviews per page.",
+                      "example": 10
+                    },
+                    "totalCount": {
+                      "type": "integer",
+                      "description": "Total number of user reviews.",
+                      "example": 1264
+                    },
+                    "reviews": {
+                      "type": "array",
+                      "description": "The returned user reviews.",
+                      "example": [
+                        "fasdfas-ad31d",
+                        "asdfasd-dj133",
+                        "fasdfs-d13f"
+                      ]
+                    },
+                    "links": {
+                      "type": "object",
+                      "example": {
+                        "nextPage": "/users/{userID}/reviews?page=2",
+                        "lastPage": "/users/{userID}/reviews?page=2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "noPath": {
+        "description": "No path",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "err": {
+                  "type": "string",
+                  "example": "Path does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "subcategoriesReq": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the subcategory",
+            "example": "grocery store"
+          }
+        }
+      },
+      "categoriesReq": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the category",
+            "example": "shopping"
+          }
+        }
+      },
+      "categoriesOptional": {
+        "type": "object",
+        "properties": {
+          "subcategories": {
+            "type": "array",
+            "description": "An array of names of subcategories",
+            "example": [
+              "grocery store",
+              "clothing store"
+            ]
+          }
+        }
+      },
+      "photosReq": {
+        "type": "object",
+        "required": [
+          "photo"
+        ],
+        "properties": {
+          "photo": {
+            "type": "string",
+            "description": "The link to the photo",
+            "example": "http://Vitricomp/Enid.png"
+          }
+        }
+      },
+      "photosOptional": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string",
+            "description": "A caption for the photo",
+            "example": "This place is beautiful!"
+          }
+        }
+      },
+      "reviewsReq": {
+        "type": "object",
+        "required": [
+          "stars",
+          "dollars"
+        ],
+        "properties": {
+          "stars": {
+            "type": "integer",
+            "description": "The stars, rating, from 0 - 5 where 5 is the best",
+            "minimum": 0,
+            "maximum": 5,
+            "example": 3
+          },
+          "dollars": {
+            "type": "integer",
+            "description": "The dollars, pricey-ness, from 1 - 4 where 4 is expensive",
+            "minimum": 1,
+            "maximum": 4,
+            "example": 2
+          }
+        }
+      },
+      "reviewsOptional": {
+        "type": "object",
+        "properties": {
+          "written": {
+            "type": "string",
+            "description": "A written review",
+            "example": "This place was a great and affordable place to eat."
+          }
+        }
+      },
+      "businessesReq": {
+        "type": "object",
+        "required": [
+          "name",
+          "streetAdr",
+          "city",
+          "state",
+          "zip",
+          "phone",
+          "category",
+          "subcategory"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "The business's name"
+          },
+          "streetAdr": {
+            "type": "string",
+            "example": "The business's street address"
+          },
+          "city": {
+            "type": "string",
+            "example": "The business's city"
+          },
+          "state": {
+            "type": "string",
+            "example": "The business's state"
+          },
+          "zip": {
+            "type": "string",
+            "example": "The business's zip code"
+          },
+          "phone": {
+            "type": "string",
+            "example": "The business's phone number"
+          },
+          "category": {
+            "type": "string",
+            "example": "The business's category (e.g. shopping)"
+          },
+          "subcategory": {
+            "type": "string",
+            "example": "The business's subcategory"
+          }
+        }
+      },
+      "businessesOptional": {
+        "type": "object",
+        "properties": {
+          "website": {
+            "type": "string",
+            "example": "The business's website URL"
+          },
+          "email": {
+            "type": "string",
+            "example": "The business's email address"
+          }
+        }
+      },
+      "businesses": {
+        "type": "object",
+        "properties": {
+          "BID": {
+            "type": "string",
+            "example": "d2d7fbb9-bc20"
+          },
+          "name": {
+            "type": "string",
+            "example": "eyeWax"
+          },
+          "streetAdr": {
+            "type": "string",
+            "example": "151 Newkirk Avenue"
+          },
+          "city": {
+            "type": "string",
+            "example": "Imperial"
+          },
+          "state": {
+            "type": "string",
+            "example": "New Mexico"
+          },
+          "zip": {
+            "type": "string",
+            "example": 97041
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1 (882) 512-3043"
+          },
+          "category": {
+            "type": "string",
+            "example": "shopping"
+          },
+          "subcategory": {
+            "type": "string",
+            "example": "grocery store"
+          }
+        }
+      },
+      "returnPhotos": {
+        "type": "object",
+        "description": "returned photo",
+        "properties": {
+          "PID": {
+            "type": "string",
+            "description": "Unique ID representing the photo.",
+            "example": "as78a6d2-bc20"
+          },
+          "BID": {
+            "type": "string",
+            "description": "Unique ID representing the business.",
+            "example": "d2d7fbb9-bc20"
+          },
+          "photo": {
+            "type": "string",
+            "description": "link to photo",
+            "example": "http://Teraprene/Pearl.png"
+          },
+          "caption": {
+            "type": "string",
+            "description": "the photo's caption",
+            "example": "Photo of the sweet Hood River Valley"
+          }
+        }
+      },
+      "returnReviews": {
+        "type": "object",
+        "description": "returned review",
+        "properties": {
+          "RID": {
+            "type": "string",
+            "description": "Unique ID representing the review.",
+            "example": "asd902fd-bc20"
+          },
+          "BID": {
+            "type": "string",
+            "description": "Unique ID representing the business.",
+            "example": "d2d7fbb9-bc20"
+          },
+          "stars": {
+            "type": "string",
+            "description": "the number of stars",
+            "example": 4
+          },
+          "dollars": {
+            "type": "string",
+            "description": "the number of dollar signs",
+            "example": 2
+          },
+          "written": {
+            "type": "string",
+            "description": "the written review",
+            "example": "Great place to eat if you are on the south side of town. Affordable as well!\n"
+          }
+        }
+      },
+      "categories": {
+        "type": "object",
+        "properties": {
+          "CID": {
+            "type": "string",
+            "description": "The category ID",
+            "example": "d2d7fbb9-bc20"
+          },
+          "name": {
+            "type": "string",
+            "description": "The category's name",
+            "example": "shopping"
+          }
+        }
+      },
+      "subcategories": {
+        "type": "object",
+        "properties": {
+          "SCID": {
+            "type": "string",
+            "description": "The subcategory ID",
+            "example": "d2d7fbb9-bc20"
+          },
+          "name": {
+            "type": "string",
+            "description": "The subcategory's name",
+            "example": "grocery store"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,14 @@
 [
   {
      'repeat(5, 10)': {
+       PID: '{{guid()}}',
        BID: '{{guid()}}',
        photo: 'http://{{company()}}/{{firstName()}}.png'
      }
   },
   {
      'repeat(5, 10)': {
+       PID: '{{guid()}}',
        BID: '{{guid()}}',
        photo: 'http://{{company()}}/{{firstName()}}.png',
        caption: '{{lorem(5, "words")}}'

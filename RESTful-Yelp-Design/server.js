@@ -20,7 +20,7 @@ var subcategories = require('./data/subcategories');
 // Parse each request to JSOn
 app.use(bodyParser.json());
 // Direct server url to openai spec
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 // spit back standard info to client for each request
 app.use(logger);
 
@@ -168,6 +168,39 @@ app.post('/businesses', function (req, res, next) {
 			}
 		});
 	}
+});
+// Get ALL businesses
+app.get('/businesses', function (req, res, next) {
+ console.log("  -- req.query:", req.query);
+
+  var page = parseInt(req.query.page) || 1;
+  var numPerPage = 10;
+  var lastPage = Math.ceil(businesses.length / numPerPage);
+  page = page < 1 ? 1 : page;
+  page = page > lastPage ? lastPage : page;
+
+  var start = (page - 1) * numPerPage;
+  var end = start + numPerPage;
+  var pageBusinesses = businesses.slice(start, end);
+
+  var links = {};
+  if (page < lastPage) {
+    links.nextPage = '/businesses?page=' + (page + 1);
+    links.lastPage = '/businesses?page=' + lastPage;
+  }
+  if (page > 1) {
+    links.prevPage = '/businesses?page=' + (page - 1);
+    links.firstPage = '/businesses?page=1';
+  }
+
+  res.status(200).json({
+    businesses: pageBusinesses,
+    pageNumber: page,
+    totalPages: lastPage,
+    pageSize: numPerPage,
+    totalCount: businesses.length,
+    links: links
+  });
 });
 // Modify a certain business
 app.put('/businesses/:BID', function (req, res, next) {
@@ -345,40 +378,6 @@ app.get('/businesses/:BID', function (req, res, next) {
 		next();
 	}
 });
-// Get ALL businesses
-app.get('/businesses', function (req, res, next) {
- console.log("  -- req.query:", req.query);
-
-  var page = parseInt(req.query.page) || 1;
-  var numPerPage = 10;
-  var lastPage = Math.ceil(businesses.length / numPerPage);
-  page = page < 1 ? 1 : page;
-  page = page > lastPage ? lastPage : page;
-
-  var start = (page - 1) * numPerPage;
-  var end = start + numPerPage;
-  var pageBusinesses = businesses.slice(start, end);
-
-  var links = {};
-  if (page < lastPage) {
-    links.nextPage = '/businesses?page=' + (page + 1);
-    links.lastPage = '/businesses?page=' + lastPage;
-  }
-  if (page > 1) {
-    links.prevPage = '/businesses?page=' + (page - 1);
-    links.firstPage = '/businesses?page=1';
-  }
-
-  res.status(200).json({
-    businesses: pageBusinesses,
-    pageNumber: page,
-    totalPages: lastPage,
-    pageSize: numPerPage,
-    totalCount: businesses.length,
-    links: links
-  });
-});
-
 
 
 
@@ -527,39 +526,8 @@ app.post('/photos/:BID', function (req, res, next) {
 		});
 	}
 });
-// Upload a photo
-app.put('/photos/:BID/:PID', function (req, res, next) {
-	console.log("  -- req.query:", req.query);
-	var BID = req.params.BID;
-	if(verifyReqPhotos(req, BID)){
-		var PID = uniqid();
-		req.body.BID = BID;
-		req.body.PID = PID;
-		photos.push(req.body);
-		res.status(201).json({
-			BID: BID,
-			PID: PID,
-			links: {
-				photos: "/photos/" + BID + '/' + PID
-			}
-		});
-	}
-	else{
-		res.status(400).json({
-			err: {
-				reason: "Request Body is missing required fields.",
-				required:{
-					photo: 	"The URL to the photo"
-				},
-				optional:{
-					caption: "The photo's caption"
-				}
-			}
-		});
-	}
-});
 // Modify a photo
-app.put('/businesses/:BID/:PID', function (req, res, next) {
+app.put('/photos/:BID/:PID', function (req, res, next) {
 	var reqBID = req.params.BID;
 	var reqPID = req.params.PID;
 	// if business 
@@ -610,7 +578,7 @@ app.put('/businesses/:BID/:PID', function (req, res, next) {
 	}
 });
 // Delete a photo
-app.delete('/reviews/:BID/:PID', function (req, res, next) {
+app.delete('/photos/:BID/:PID', function (req, res, next) {
 	console.log(req.params);
 	var reqBID = req.params.BID;
 	var reqPID = req.params.PID;
@@ -680,14 +648,12 @@ app.get('/categories', function (req, res, next) {
 	res.status(200).json(json || pages);
 });
 // Create a category
-app.post('/categories/:USERID', function (req, res, next) {
+app.post('/categories', function (req, res, next) {
 	console.log("  -- req.query:", req.query);
-	var userid = req.params.USERID;
 
 	if(verifyReqCategories(req)){
 		var CID = uniqid();
 		var json = {};
-		json.USERID = userid;
 		json.categories = [];
 		json.categories.push({CID: CID, name: req.body.name});
 		if(req.body.subcategories){
@@ -733,7 +699,6 @@ app.put('/categories/:CID', function (req, res, next) {
 								addSubcategories(reqCID, req.body.subcategories);
 								delete req.body.subcategories;
 							}
-							console.log("ASd")
 							categories[idx].categories[idx2].name = req.body.name;
 							return true;
 						}
