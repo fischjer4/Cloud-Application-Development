@@ -1,6 +1,8 @@
 #Added by MacOS
 .DS_Store
 
+.node_modules
+
 #Added by compiling tex files
 *.toc
 *.aux
