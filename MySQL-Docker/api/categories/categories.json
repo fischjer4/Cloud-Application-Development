@@ -1,0 +1,38 @@
+[
+  {
+    "category": "Restaurant",
+    "subcategories": [
+      "Brewpub",
+      "Coffee Shop",
+      "Hawaiian",
+      "Bakery",
+      "Pizza",
+      "Mexican",
+      "Chinese",
+      "Indian",
+      "Italian"
+    ]
+  },
+  {
+    "category": "Shopping",
+    "subcategories": [
+      "Brewing Supply",
+      "Hardware",
+      "Groceries",
+      "Book Store",
+      "Bicycle Shop",
+      "Tea House",
+      "Flowers",
+      "Clothing"
+    ]
+  },
+  {
+    "category": "Entertainment",
+    "subcategories": [
+      "Movie Theater",
+      "Art Gallery",
+      "Concert Hall",
+      "Nightclub"
+    ]
+  }
+]

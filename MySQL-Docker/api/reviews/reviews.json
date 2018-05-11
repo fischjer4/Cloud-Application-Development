@@ -1,0 +1,79 @@
+[
+  {
+    "id": 0,
+    "userID": 7,
+    "businessID": 8,
+    "dollars": 1,
+    "stars": 4.5,
+    "review": "Cheap, delicious food."
+  },
+  {
+    "id": 1,
+    "userID": 25,
+    "businessID": 2,
+    "dollars": 1,
+    "stars": 4,
+    "review": "How many fasteners can one room hold?"
+  },
+  {
+    "id": 2,
+    "userID": 26,
+    "businessID": 1,
+    "dollars": 1,
+    "stars": 5,
+    "review": "Joel, the owner, is super friendly and helpful."
+  },
+  {
+    "id": 3,
+    "userID": 21,
+    "businessID": 14,
+    "dollars": 2,
+    "stars": 4
+  },
+  {
+    "id": 4,
+    "userID": 28,
+    "businessID": 18,
+    "dollars": 1,
+    "stars": 4,
+    "review": "Good beer, good food, though limited selection."
+  },
+  {
+    "id": 5,
+    "userID": 21,
+    "businessID": 9,
+    "dollars": 1,
+    "stars": 5,
+    "review": "A Corvallis gem."
+  },
+  {
+    "id": 6,
+    "userID": 26,
+    "businessID": 8,
+    "dollars": 1,
+    "stars": 5,
+    "review": "Yummmmmmm!"
+  },
+  {
+    "id": 7,
+    "userID": 25,
+    "businessID": 18,
+    "dollars": 2,
+    "stars": 4.5
+  },
+  {
+    "id": 8,
+    "userID": 20,
+    "businessID": 2,
+    "dollars": 2,
+    "stars": 4
+  },
+  {
+    "id": 9,
+    "userID": 6,
+    "businessID": 15,
+    "dollars": 2,
+    "stars": 5,
+    "review": "Try the hazlenut torte.  It's the best!"
+  }
+]

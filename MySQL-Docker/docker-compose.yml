@@ -1,0 +1,37 @@
+version: '3.2'
+services:
+  yelp-api:
+    # uncomment the below volume to mount the cur dir to app in container, so nodemon will work
+    volumes:
+      - ./:/usr/src/app
+    command: "npm start"
+    container_name:
+      yelp-api
+    build: .
+    environment:
+      MYSQL_DATABASE: yelpapi
+      MYSQL_HOST: db_mysql
+      DB_PORT: 3306
+      DB_USER: jeremy
+      DB_PASSWORD: root
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    networks:
+      - yelp-network
+    links:
+      - db_mysql
+  db_mysql:
+    container_name: db_mysql
+    build: ./MySQL
+    volumes:
+      - db_mysql-data:/var/lib/mysql
+    networks:
+      - yelp-network
+
+volumes:
+  db_mysql-data:
+networks:
+  yelp-network:
+    driver:
+      bridge
