@@ -1,7 +1,3 @@
-# Assignment 3
-
-The goals of this assignment are to use MongoDB to store application data and to start incorporating security features into our API.  There are a few parts to this assignment, as described below.
-
 ## 1. Use MongoDB to store user data for your API
 
 Your first task for this assignment is to incorporate a MongoDB database to store information about application users.  At a minimum, each user in this database should have the following information stored:
