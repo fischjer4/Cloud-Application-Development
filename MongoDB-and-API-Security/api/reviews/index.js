@@ -164,6 +164,22 @@ function deleteReview(reviewID, mysqlPool){
     );
   });
 }
+function getReviewsByUserID(userID, mysqlPool){
+  return new Promise((resolve, reject) => {
+    mysqlPool.query(
+      'SELECT * FROM reviews WHERE userID=?',
+      [ userID ],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve(result);
+        }
+      }
+    );
+  });
+}
 
 
 
@@ -292,3 +308,4 @@ router.delete('/:reviewID', function (req, res, next) {
 
 exports.router = router;
 exports.getReviewsByBusinessID = getReviewsByBusinessID;
+exports.getReviewsByUserID = getReviewsByUserID;

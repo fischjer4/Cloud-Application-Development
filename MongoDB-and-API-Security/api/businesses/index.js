@@ -3,8 +3,6 @@ const validation = require('../../lib/validation');
 const { getReviewsByBusinessID } = require('../reviews');
 const { getPhotosByBusinessID } = require('../photos');
 
-exports.router = router;
-
 
 /*
  * Schema describing required/optional fields of a business object.
@@ -170,7 +168,22 @@ function getSpecificBusinessDetails(businessID, mysqlPool){
     );
   });
 }
-
+function getBusinessesByOwnerID(ownerID, mysqlPool){
+  return new Promise((resolve, reject) => {
+    mysqlPool.query(
+      'SELECT * FROM businesses WHERE ownerID=?',
+      [ ownerID ],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve(result);
+        }
+      }
+    );
+  });
+}
 
 
 
@@ -333,3 +346,7 @@ router.delete('/:businessID', function(req, res, next) {
       });
     });
 });
+
+
+exports.router = router;
+exports.getBusinessesByOwnerID = getBusinessesByOwnerID;

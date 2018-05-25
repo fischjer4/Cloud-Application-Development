@@ -29,6 +29,7 @@ CREATE TABLE reviews (
 
 	PRIMARY KEY (id),
 	INDEX idx_ownerid (businessID),
+	CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`businessID`) REFERENCES `businesses` (`id`) ON DELETE CASCADE,
 	UNIQUE(id)
 );
 
@@ -42,5 +43,6 @@ CREATE TABLE photos (
 
 	PRIMARY KEY (id),
 	INDEX idx_ownerid (businessID),
+	CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`businessID`) REFERENCES `businesses` (`id`) ON DELETE CASCADE,
 	UNIQUE(id)
 );

@@ -138,6 +138,22 @@ function deletePhoto(photoID, mysqlPool){
     );
   });
 }
+function getPhotosByUserID(userID, mysqlPool){
+  return new Promise((resolve, reject) => {
+    mysqlPool.query(
+      'SELECT * FROM photos WHERE userID=?',
+      [ userID ],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve(result);
+        }
+      }
+    );
+  });
+}
 
 
 
@@ -261,3 +277,4 @@ router.delete('/:photoID', function (req, res, next) {
 
 exports.router = router;
 exports.getPhotosByBusinessID = getPhotosByBusinessID;
+exports.getPhotosByUserID = getPhotosByUserID
